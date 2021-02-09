@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+}
+
+.container {
+  background-color: rgb(144, 177, 144);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem;
+}
+
+.inner-box {
+  box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.2);
+  background-color: whitesmoke;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem;
+  text-align: center;
+}
+
+.heading {
+  margin-bottom: 2rem;
+  font-size: 6rem;
+}
+
+.sub-heading {
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.rules {
+  margin-bottom: 6rem;
+  font-size: 2rem;
+}
+
+.guess-container {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+input {
+  width: 15rem;
+  margin-bottom: 1rem;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-align: center;
+  padding: 0.6rem;
+  font-size: 2rem;
+}
+
+input:focus {
+  box-shadow: 0 0 2px green;
+}
+
+.btn {
+  border: 1px solid black;
+  border-radius: 3px;
+  background-color: rgb(16, 148, 16);
+  padding: 1rem 2rem;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background-color: rgb(20, 121, 20);
+}
+
+.btn:active {
+  background-color: rgb(13, 87, 13);
+}
+
+input:focus,
+.btn:focus {
+  outline: none;
+}

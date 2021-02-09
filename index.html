@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulls and cows</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner-box">
+        <div class="bulls-cows">
+          <img src="assets/bull.svg" alt="bull" />
+          <img src="assets/cow.svg" alt="cow" />
+        </div>
+        <h1 class="heading">Bulls and Cows</h1>
+        <h3 class="sub-heading">Guess the secret number!</h3>
+        <p class="rules">
+          The secret number must consist of <strong>4 digits</strong> and each
+          digit must be <strong>unique</strong>.
+        </p>
+        <div class="guess-container">
+          <label for="guess">Your guess:</label>
+          <input
+            type="text"
+            id="guess"
+            class="guess"
+            name="guess"
+            maxlength="4"
+          />
+          <button type="button" class="btn">CHECK</button>
+        </div>
+        <p class="hint">Message for player</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
