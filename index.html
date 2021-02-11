@@ -9,29 +9,130 @@
   </head>
   <body>
     <div class="container">
-      <div class="inner-box">
+      <!-- START SCREEN -->
+      <div class="start-modal">
+        <h2 class="start-heading">Bulls and Cows</h2>
         <div class="bulls-cows">
           <img src="assets/bull.svg" alt="bull" />
           <img src="assets/cow.svg" alt="cow" />
         </div>
+        <div class="name-box">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="input-text name"
+            placeholder="Player's name"
+          />
+        </div>
+        <div class="level-box">
+          <input
+            type="radio"
+            name="level"
+            value="easy"
+            id="easy"
+            class="level"
+            checked
+          />
+          <label for="easy" class="label">Easy</label>
+          <input
+            type="radio"
+            name="level"
+            value="medium"
+            id="medium"
+            class="level"
+          />
+          <label for="medium" class="label">Medium</label>
+          <input
+            type="radio"
+            name="level"
+            value="hard"
+            id="hard"
+            class="level"
+          />
+          <label for="hard" class="label">Hard</label>
+        </div>
+        <button type="button" class="btn start">START</button>
+      </div>
+
+      <!-- GAMEPLAY -->
+      <div class="inner-box">
         <h1 class="heading">Bulls and Cows</h1>
-        <h3 class="sub-heading">Guess the secret number!</h3>
+        <div class="bulls-cows">
+          <img src="assets/bull.svg" alt="bull" />
+          <img src="assets/cow.svg" alt="cow" />
+        </div>
+        <h3 class="sub-heading">Guess the secret number</h3>
         <p class="rules">
-          The secret number must consist of <strong>4 digits</strong> and each
-          digit must be <strong>unique</strong>.
+          The secret number must consist of <strong>4 unique digits</strong>.
         </p>
         <div class="guess-container">
-          <label for="guess">Your guess:</label>
+          <label for="guess" class="label">Your guess:</label>
           <input
             type="text"
             id="guess"
-            class="guess"
+            class="input-text guess"
             name="guess"
             maxlength="4"
           />
-          <button type="button" class="btn">CHECK</button>
+          <p class="message1">Go on!</p>
+          <p class="message2">Try your luck!</p>
+          <button type="button" class="btn check">CHECK</button>
         </div>
-        <p class="hint">Message for player</p>
+
+        <!-- WIN SCREEN -->
+        <div class="end-modal end-modal-win hidden">
+          <h2 class="end-heading win-heading">End heading</h2>
+          <h3 class="end-sub-heading win-sub-heading">End message</h3>
+          <div class="bull-box">
+            <img src="assets/bull.svg" alt="bull" />
+            <img src="assets/bull.svg" alt="bull" />
+            <img src="assets/bull.svg" alt="bull" />
+            <img src="assets/bull.svg" alt="bull" />
+          </div>
+          <p class="end-message win-message2">End message</p>
+          <p class="end-message win-message3">End message</p>
+          <p class="end-message win-message4">End message</p>
+          <p class="end-message win-message5">End message</p>
+          <div class="again-box">
+            <p class="end-question">Fancy another game, champion?</p>
+            <div class="btn-box">
+              <button type="button" class="btn no-btn no-btn-win">NO</button>
+              <button type="button" class="btn yes-btn-win">YES</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOSS SCREEN -->
+        <div class="end-modal end-modal-loss hidden">
+          <h2 class="end-heading loss-heading">End heading</h2>
+          <h3 class="end-sub-heading loss-sub-heading">End message</h3>
+          <div class="bull-box">
+            <img src="assets/cow.svg" alt="cow" />
+            <img src="assets/cow.svg" alt="cow" />
+            <img src="assets/cow.svg" alt="cow" />
+            <img src="assets/cow.svg" alt="cow" />
+          </div>
+          <p class="end-message loss-message2">End message</p>
+          <p class="end-message loss-message3">End message</p>
+          <p class="end-message loss-message4">End message</p>
+          <p class="end-message loss-message5">End message</p>
+          <div class="again-box">
+            <p class="end-question end-question-loss">
+              Fancy another game, looser?
+            </p>
+            <div class="btn-box">
+              <button type="button" class="btn no-btn no-btn-loss">NO</button>
+              <button type="button" class="btn yes-btn-loss">YES</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- NO CONTINUE SCREEN -->
+        <div class="no-modal hidden">
+          <h2 class="no-heading">Coward!</h2>
+          <img src="assets/cow.svg" alt="cow" />
+        </div>
       </div>
     </div>
 

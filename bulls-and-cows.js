@@ -1,3 +1,5 @@
+// THIS GAME IS A NODE VERSION OF THE GAME
+
 const prompt = require("prompt-sync")({ sigint: true });
 
 function getSecreteNumber() {
