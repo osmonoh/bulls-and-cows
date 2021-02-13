@@ -1,11 +1,12 @@
 # Bulls and Cows
 
-This is my take on the school project where we were supposed to create a node version of the bulls and cows game. I finished very quickly so I decided to challenge myself and take it to the browser.
+This is my take on the school project where we were supposed to create a node version of the bulls and cows game. I finished very quickly with plenty of time left  so I decided to challenge myself further and take it to the browser.
 
-The node version I created: [bulls-and-cows.js](bulls-and-cows.js).
+The node version I created: [bulls-and-cows.js](bulls-and-cows.js).\n
 My browser version:  [script.js](script.js).
 
 Bellow you can read the instructions for the project.
+
 -------------------------------------------------------------
 
 In this project we will build a two player game that is called **Bulls and Cows**.
