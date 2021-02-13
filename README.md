@@ -1,11 +1,11 @@
 # Bulls and Cows
 
-This is my take on the school project where we were supposed to create a node version of the bulls and cows game. I finished very quickly with plenty of time left  so I decided to challenge myself further and take it to the browser.
+This is my take on the school project where we were supposed to create a terminal/node version of the bulls and cows game. I finished very quickly with plenty of time left  so I decided to challenge myself further and take it to the browser making it my first ever DOM manipulation project.
 
-The node version I created: [bulls-and-cows.js](bulls-and-cows.js).\n
-My browser version:  [script.js](script.js).
+- My terminal version: [bulls-and-cows.js](bulls-and-cows.js)
+- My browser version:  [script.js](script.js)
 
-Bellow you can read the instructions for the project.
+Bellow you can read the original instructions for the project. v
 
 -------------------------------------------------------------
 
