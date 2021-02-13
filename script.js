@@ -172,57 +172,56 @@ startBtn.addEventListener("click", function () {
   document.querySelector(".sub-heading").textContent += `, ${playerName}!`;
 });
 
-// CHECK BUTTON
-document.querySelector(".check").addEventListener("click", function () {
-  guess = document.querySelector(".guess").value;
-
+// CHECK THE PLAYER'S GUESS
+function checkPlayersGuess() {
   document.querySelector(".message1").textContent = guess;
   document.querySelector(".message2").textContent = compareNumbers(
     secretNumber,
     guess
   );
   document.querySelector(".guess").value = "";
+}
+////// BY CLICKING CHECK BUTTON
+document.querySelector(".check").addEventListener("click", function () {
+  guess = document.querySelector(".guess").value;
+  checkPlayersGuess();
 });
-
-// PRESS ENTER TO CHECK NUMBER
+////// BY PRESSING ENTER
 document.addEventListener("keydown", function (e) {
   guess = document.querySelector(".guess").value;
   if (guess && e.key === "Enter") {
-    document.querySelector(".message1").textContent = guess;
-    document.querySelector(".message2").textContent = compareNumbers(
-      secretNumber,
-      guess
-    );
-    document.querySelector(".guess").value = "";
+    checkPlayersGuess();
   }
 });
 
 // NO CONTINUE BUTTON
-// WIN
-document.querySelector(".no-btn-win").addEventListener("click", function () {
+function showNoContinueScreen() {
   document.querySelector(".end-modal-win").classList.add("hidden");
   document.querySelector(".no-modal").classList.remove("hidden");
-});
-// LOSS
-document.querySelector(".no-btn-loss").addEventListener("click", function () {
-  document.querySelector(".end-modal-win").classList.add("hidden");
-  document.querySelector(".no-modal").classList.remove("hidden");
-});
+}
+////// WIN
+document
+  .querySelector(".no-btn-win")
+  .addEventListener("click", showNoContinueScreen);
+////// LOSS
+document
+  .querySelector(".no-btn-loss")
+  .addEventListener("click", showNoContinueScreen);
 
 // YES PLAY AGAIN BUTTON
-// WIN
+function playAgainReset() {
+  secretNumber = getSecreteNumber();
+  guessNumber = 0;
+  document.querySelector(".message1").textContent = "Go on!";
+  document.querySelector(".message2").textContent = "Try your luck!";
+}
+////// WIN
 document.querySelector(".yes-btn-win").addEventListener("click", function () {
   document.querySelector(".end-modal-win").classList.add("hidden");
-  secretNumber = getSecreteNumber();
-  guessNumber = 0;
-  document.querySelector(".message1").textContent = "Go on!";
-  document.querySelector(".message2").textContent = "Try your luck!";
+  playAgainReset();
 });
-// LOSS
+////// LOSS
 document.querySelector(".yes-btn-loss").addEventListener("click", function () {
   document.querySelector(".end-modal-loss").classList.add("hidden");
-  secretNumber = getSecreteNumber();
-  guessNumber = 0;
-  document.querySelector(".message1").textContent = "Go on!";
-  document.querySelector(".message2").textContent = "Try your luck!";
+  playAgainReset();
 });
