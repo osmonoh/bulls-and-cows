@@ -57,6 +57,19 @@
 
       <!-- GAMEPLAY -->
       <div class="inner-box">
+        <!-- QUIT BUTTON AND MODAL -->
+        <div class="quit-btn hidden">&times</div>
+        <div class="quit-modal hidden">
+          <p>All progress will be lost. Are you sure you want to quit?</p>
+          <div class="quit-btn-box">
+            <button type="button" class="btn quit-no">NO</button>
+            <button type="button" class="btn quit-yes">YES</button>
+          </div>
+        </div>
+        <!-- OVERLAY -->
+        <div class="overlay hidden"></div>
+
+        <!-- ACTUAL GAME -->
         <h1 class="heading">Bulls and Cows</h1>
         <div class="bulls-cows">
           <img src="assets/bull.svg" alt="bull" />
@@ -67,17 +80,25 @@
           The secret number must consist of <strong>4 unique digits</strong>.
         </p>
         <div class="guess-container">
-          <label for="guess" class="label">Your guess:</label>
-          <input
-            type="text"
-            id="guess"
-            class="input-text guess"
-            name="guess"
-            maxlength="4"
-          />
-          <p class="message1">Go on!</p>
-          <p class="message2">Try your luck!</p>
-          <button type="button" class="btn check">CHECK</button>
+          <div class="guess-container-middle">
+            <label for="guess" class="label">Your guess:</label>
+            <input
+              type="text"
+              id="guess"
+              class="input-text guess"
+              name="guess"
+              maxlength="4"
+            />
+            <p class="message1">Go on!</p>
+            <p class="message2">Try your luck!</p>
+            <button type="button" class="btn check">CHECK</button>
+          </div>
+          <div class="guess-container-right">
+            <p class="label">Past guesses:</p>
+            <div class="guesses-box">
+              <p class="empty"></p>
+            </div>
+          </div>
         </div>
 
         <!-- WIN SCREEN -->

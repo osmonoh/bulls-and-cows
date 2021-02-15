@@ -37,9 +37,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 8rem; */
   z-index: 0;
 }
+
+/* START SCREEN */
 
 .start-modal {
   position: absolute;
@@ -102,10 +103,11 @@ body {
   background-color: rgb(78, 32, 32);
 }
 
+/* GAME PLAY */
+
 .inner-box {
   position: relative;
   box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.2);
-  /* background-color: whitesmoke; */
   background-color: rgb(224, 218, 161);
   width: 80%;
   height: 80%;
@@ -117,6 +119,72 @@ body {
   text-align: center;
 }
 
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(224, 218, 161, 0.9);
+  z-index: 5;
+}
+
+/* QUIT COMPONENTS */
+.quit-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  opacity: 0.2;
+  font-size: 6rem;
+  line-height: 0.6;
+  cursor: pointer;
+}
+
+.quit-btn:hover {
+  opacity: 1;
+}
+
+.quit-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40rem;
+  height: 20rem;
+  box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+  background-color: rgb(78, 32, 32);
+  padding: 2rem;
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.quit-btn-box {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.quit-btn-box .btn {
+  width: 8rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.quit-btn-box .quit-no {
+  background-color: rgb(131, 88, 88);
+}
+
+.quit-btn-box .quit-no:hover {
+  background-color: rgb(116, 67, 67);
+}
+
+/* ACTUAL GAME */
 .heading {
   font-size: 2.6rem;
 }
@@ -134,13 +202,22 @@ body {
 }
 
 .guess-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.guess-container-middle {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.guess-container label {
+.guess-container-middle .label {
   margin-bottom: 0.5rem;
 }
 
@@ -154,12 +231,28 @@ body {
   font-weight: 700;
 }
 
+input:focus,
+.btn:focus {
+  outline: none;
+}
+
 input:focus {
   box-shadow: 0 0 2px rgb(20, 121, 20);
 }
 
+.message1 {
+  margin-bottom: 0.2rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.message2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
 .btn {
-  /* border: 1px solid black; */
   border: none;
   border-radius: 3px;
   background-color: rgb(16, 148, 16);
@@ -179,22 +272,34 @@ input:focus {
   background-color: rgb(13, 87, 13);
 }
 
-input:focus,
-.btn:focus {
-  outline: none;
+.guess-container-right {
+  margin-left: auto;
 }
 
-.message1 {
-  margin-bottom: 0.2rem;
+.guess-container-right .label {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
+}
+
+.guesses-box {
+  width: 24rem;
+  height: 18rem;
+  margin-bottom: 1rem;
+  overflow: auto;
+}
+
+.guesses-box p {
   font-size: 2rem;
   font-weight: 600;
 }
 
-.message2 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  font-weight: 600;
+.guesses-box p:nth-of-type(even) {
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
+
+/* END SCREEN: WIN/LOSS */
 
 .end-modal {
   position: absolute;
@@ -207,7 +312,6 @@ input:focus,
   justify-content: center;
   align-items: center;
   color: white;
-  /* z-index: 10; */
 }
 
 .end-modal-win {
@@ -282,6 +386,8 @@ input:focus,
   background-color: rgb(116, 67, 67);
 }
 
+/* NO COUNTINUE SCREEN */
+
 .no-modal {
   position: absolute;
   content: "";
@@ -294,7 +400,6 @@ input:focus,
   justify-content: center;
   align-items: center;
   color: white;
-  /* z-index: 10; */
 }
 
 .no-heading {
@@ -307,6 +412,8 @@ input:focus,
   width: 20rem;
   transform: rotateZ(180deg);
 }
+
+/* SPECIAL CLASSES */
 
 .disabled {
   pointer-events: none;

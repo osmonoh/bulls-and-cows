@@ -22,6 +22,7 @@ let gamesPlayed = 0;
 let scores = [];
 let limit = null;
 let message = "";
+
 const checkBtn = document.querySelector(".check");
 const startBtn = document.querySelector(".start");
 
@@ -71,6 +72,12 @@ function compareNumbers(secretNumber, guess) {
     guessNumber++;
     let bulls = 0;
     let cows = 0;
+    function getAverageScore(scores) {
+      return (
+        Math.round((scores.reduce((a, x) => a + x, 0) / scores.length) * 100) /
+        100
+      );
+    }
     for (let i = 0; i < guess.length; i++) {
       if (secretNumber[i] === guess[i]) {
         bulls++;
@@ -81,12 +88,9 @@ function compareNumbers(secretNumber, guess) {
 
     // WIN
     if (bulls === 4) {
-      // checkBtn.classList.add("disabled");
       gamesPlayed++;
       scores.push(guessNumber);
-      let averageScore =
-        Math.round((scores.reduce((a, x) => a + x, 0) / scores.length) * 100) /
-        100;
+      let averageScore = getAverageScore(scores);
 
       document.querySelector(".end-modal-win").classList.remove("hidden");
       document.querySelector(
@@ -101,26 +105,22 @@ function compareNumbers(secretNumber, guess) {
       document.querySelector(
         ".win-message3"
       ).textContent = `Games played: ${gamesPlayed}`;
-      document.querySelector(".win-message4").textContent = `Scores: ${scores}`;
+      document.querySelector(
+        ".win-message4"
+      ).textContent = `Scores: ${scores.join(", ")}`;
       document.querySelector(
         ".win-message5"
       ).textContent = `Average score: ${averageScore}`;
-      return `Good job, ${playerName}! You found the secret number!
-  Number of tries: ${guessNumber}
-  Games played: ${gamesPlayed} Scores: ${scores} Average score: ${averageScore}`;
+      return;
     }
 
     // LOSS
     if (limit && guessNumber === limit) {
-      // checkBtn.classList.add("disabled");
       gamesPlayed++;
       scores.push(guessNumber * 2);
-      let averageScore =
-        Math.round((scores.reduce((a, x) => a + x, 0) / scores.length) * 100) /
-        100;
+      let averageScore = getAverageScore(scores);
 
       document.querySelector(".end-modal-loss").classList.remove("hidden");
-      // document.querySelector(".end-modal-loss").style.backgroundColor = "red";
       document.querySelector(
         ".loss-heading"
       ).textContent = `You loose, ${playerName}!`;
@@ -135,20 +135,18 @@ function compareNumbers(secretNumber, guess) {
       ).textContent = `Games played: ${gamesPlayed}`;
       document.querySelector(
         ".loss-message4"
-      ).textContent = `Scores: ${scores}`;
+      ).textContent = `Scores: ${scores.join(", ")}`;
       document.querySelector(
         ".loss-message5"
       ).textContent = `Average score: ${averageScore}`;
-
-      return `Too many tries, ${playerName}! You loose!
-      Number of tries: ${guessNumber} + ${guessNumber}(penalty)
-      Games played: ${gamesPlayed} Scores: ${scores} Average score: ${averageScore}`;
+      return;
     }
 
     // 0 BULLS 0 COWS
     if (bulls === 0 && cows === 0) {
       return getFunnyMessage();
     }
+    // HINT MESSAGE
     let word1 = bulls === 1 ? "bull" : "bulls";
     let word2 = cows === 1 ? "cow" : "cows";
     return `${bulls} ${word1} and ${cows} ${word2}`;
@@ -170,15 +168,34 @@ startBtn.addEventListener("click", function () {
   playerName = document.querySelector(".name").value || "Stranger";
   document.querySelector(".start-modal").classList.add("hidden");
   document.querySelector(".sub-heading").textContent += `, ${playerName}!`;
+  document.querySelector(".quit-btn").classList.remove("hidden");
 });
 
 // CHECK THE PLAYER'S GUESS
 function checkPlayersGuess() {
+  let result = compareNumbers(secretNumber, guess);
   document.querySelector(".message1").textContent = guess;
-  document.querySelector(".message2").textContent = compareNumbers(
-    secretNumber,
-    guess
-  );
+  document.querySelector(".message2").textContent = result;
+
+  if (validateGuess(guess)) {
+    let messageGuess = document.createElement("p");
+    messageGuess.appendChild(document.createTextNode(guess));
+    let messageHint = document.createElement("p");
+    messageHint.appendChild(document.createTextNode(result));
+    document
+      .querySelector(".guesses-box")
+      .insertBefore(
+        messageHint,
+        document.querySelector(".guesses-box").firstChild
+      );
+    document
+      .querySelector(".guesses-box")
+      .insertBefore(
+        messageGuess,
+        document.querySelector(".guesses-box").firstChild
+      );
+  }
+
   document.querySelector(".guess").value = "";
 }
 ////// BY CLICKING CHECK BUTTON
@@ -194,10 +211,23 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// NO CONTINUE BUTTON
+// MORE VARIABLES - MOVE UP!!!!!!!! todo
+// plus check other stuff for refactoring!!!!! todo
+const endModalWin = document.querySelector(".end-modal-win");
+const endModalLoss = document.querySelector(".end-modal-loss");
+const noAgainModal = document.querySelector(".no-modal");
+const quitModal = document.querySelector(".quit-modal");
+const overlay = document.querySelector(".overlay");
+
+// NO PLAY AGAIN BUTTON
 function showNoContinueScreen() {
-  document.querySelector(".end-modal-win").classList.add("hidden");
-  document.querySelector(".no-modal").classList.remove("hidden");
+  if (!endModalWin.classList.contains("hidden")) {
+    endModalWin.classList.add("hidden");
+  }
+  if (!endModalLoss.classList.contains("hidden")) {
+    endModalLoss.classList.add("hidden");
+  }
+  noAgainModal.classList.remove("hidden");
 }
 ////// WIN
 document
@@ -214,14 +244,61 @@ function playAgainReset() {
   guessNumber = 0;
   document.querySelector(".message1").textContent = "Go on!";
   document.querySelector(".message2").textContent = "Try your luck!";
+  document.querySelector(".guesses-box").textContent = "";
 }
 ////// WIN
 document.querySelector(".yes-btn-win").addEventListener("click", function () {
-  document.querySelector(".end-modal-win").classList.add("hidden");
+  endModalWin.classList.add("hidden");
   playAgainReset();
 });
 ////// LOSS
 document.querySelector(".yes-btn-loss").addEventListener("click", function () {
-  document.querySelector(".end-modal-loss").classList.add("hidden");
+  endModalLoss.classList.add("hidden");
   playAgainReset();
+});
+
+// QUIT BUTTON
+document.querySelector(".quit-btn").addEventListener("click", function () {
+  quitModal.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+});
+
+// QUIT MODAL
+function closeQuitModal() {
+  quitModal.classList.add("hidden");
+  overlay.classList.add("hidden");
+}
+////// NO QUIT BUTTON
+document.querySelector(".quit-no").addEventListener("click", closeQuitModal);
+////// NO QUIT CLICK ON OVERLAY
+overlay.addEventListener("click", closeQuitModal);
+////// NO QUIT PRESS ESC
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !quitModal.classList.contains("hidden")) {
+    closeQuitModal();
+  }
+});
+////// YES QUIT BUTTON
+document.querySelector(".quit-yes").addEventListener("click", function () {
+  closeQuitModal();
+
+  if (!endModalWin.classList.contains("hidden")) {
+    endModalWin.classList.add("hidden");
+  }
+  if (!endModalLoss.classList.contains("hidden")) {
+    endModalLoss.classList.add("hidden");
+  }
+  if (!noAgainModal.classList.contains("hidden")) {
+    noAgainModal.classList.add("hidden");
+  }
+
+  document.querySelector(".start-modal").classList.remove("hidden");
+  document.querySelector(".quit-btn").classList.add("hidden");
+  document.querySelector(".sub-heading").textContent =
+    "Guess the secret number";
+  document.querySelector(".name").value = "";
+  document.querySelector("#easy").checked = true;
+  playAgainReset();
+  gamesPlayed = 0;
+  scores = [];
 });
