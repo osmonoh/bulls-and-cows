@@ -23,8 +23,21 @@ let scores = [];
 let limit = null;
 let message = "";
 
-const checkBtn = document.querySelector(".check");
+const startModal = document.querySelector(".start-modal");
+const nameInput = document.querySelector(".name");
 const startBtn = document.querySelector(".start");
+const gameSubHeading = document.querySelector(".sub-heading");
+const guessInput = document.querySelector(".guess");
+const guessMessage = document.querySelector(".message1");
+const hintMessage = document.querySelector(".message2");
+const checkBtn = document.querySelector(".check");
+const pastGuessesBox = document.querySelector(".guesses-box");
+const endModalWin = document.querySelector(".end-modal-win");
+const endModalLoss = document.querySelector(".end-modal-loss");
+const noAgainModal = document.querySelector(".no-modal");
+const quitButton = document.querySelector(".quit-btn");
+const quitModal = document.querySelector(".quit-modal");
+const overlay = document.querySelector(".overlay");
 
 // SETS THE DIFFICULTY LEVEL
 function getLevel(level) {
@@ -165,59 +178,41 @@ startBtn.addEventListener("click", function () {
       getLevel(level);
     }
   }
-  playerName = document.querySelector(".name").value || "Stranger";
-  document.querySelector(".start-modal").classList.add("hidden");
-  document.querySelector(".sub-heading").textContent += `, ${playerName}!`;
+  playerName = nameInput.value || "Stranger";
+  startModal.classList.add("hidden");
+  gameSubHeading.textContent += `, ${playerName}!`;
   document.querySelector(".quit-btn").classList.remove("hidden");
 });
 
 // CHECK THE PLAYER'S GUESS
 function checkPlayersGuess() {
   let result = compareNumbers(secretNumber, guess);
-  document.querySelector(".message1").textContent = guess;
-  document.querySelector(".message2").textContent = result;
+  guessMessage.textContent = guess;
+  hintMessage.textContent = result;
 
   if (validateGuess(guess)) {
     let messageGuess = document.createElement("p");
     messageGuess.appendChild(document.createTextNode(guess));
     let messageHint = document.createElement("p");
     messageHint.appendChild(document.createTextNode(result));
-    document
-      .querySelector(".guesses-box")
-      .insertBefore(
-        messageHint,
-        document.querySelector(".guesses-box").firstChild
-      );
-    document
-      .querySelector(".guesses-box")
-      .insertBefore(
-        messageGuess,
-        document.querySelector(".guesses-box").firstChild
-      );
+    pastGuessesBox.insertBefore(messageHint, pastGuessesBox.firstChild);
+    pastGuessesBox.insertBefore(messageGuess, pastGuessesBox.firstChild);
   }
 
-  document.querySelector(".guess").value = "";
+  guessInput.value = "";
 }
 ////// BY CLICKING CHECK BUTTON
-document.querySelector(".check").addEventListener("click", function () {
-  guess = document.querySelector(".guess").value;
+checkBtn.addEventListener("click", function () {
+  guess = guessInput.value;
   checkPlayersGuess();
 });
 ////// BY PRESSING ENTER
 document.addEventListener("keydown", function (e) {
-  guess = document.querySelector(".guess").value;
+  guess = guessInput.value;
   if (guess && e.key === "Enter") {
     checkPlayersGuess();
   }
 });
-
-// MORE VARIABLES - MOVE UP!!!!!!!! todo
-// plus check other stuff for refactoring!!!!! todo
-const endModalWin = document.querySelector(".end-modal-win");
-const endModalLoss = document.querySelector(".end-modal-loss");
-const noAgainModal = document.querySelector(".no-modal");
-const quitModal = document.querySelector(".quit-modal");
-const overlay = document.querySelector(".overlay");
 
 // NO PLAY AGAIN BUTTON
 function showNoContinueScreen() {
@@ -242,9 +237,9 @@ document
 function playAgainReset() {
   secretNumber = getSecreteNumber();
   guessNumber = 0;
-  document.querySelector(".message1").textContent = "Go on!";
-  document.querySelector(".message2").textContent = "Try your luck!";
-  document.querySelector(".guesses-box").textContent = "";
+  guessMessage.textContent = "Go on!";
+  hintMessage.textContent = "Try your luck!";
+  pastGuessesBox.textContent = "";
 }
 ////// WIN
 document.querySelector(".yes-btn-win").addEventListener("click", function () {
@@ -258,7 +253,7 @@ document.querySelector(".yes-btn-loss").addEventListener("click", function () {
 });
 
 // QUIT BUTTON
-document.querySelector(".quit-btn").addEventListener("click", function () {
+quitButton.addEventListener("click", function () {
   quitModal.classList.remove("hidden");
   overlay.classList.remove("hidden");
 });
@@ -292,12 +287,12 @@ document.querySelector(".quit-yes").addEventListener("click", function () {
     noAgainModal.classList.add("hidden");
   }
 
-  document.querySelector(".start-modal").classList.remove("hidden");
-  document.querySelector(".quit-btn").classList.add("hidden");
-  document.querySelector(".sub-heading").textContent =
-    "Guess the secret number";
-  document.querySelector(".name").value = "";
+  startModal.classList.remove("hidden");
+  quitButton.classList.add("hidden");
+  gameSubHeading.textContent = "Guess the secret number";
+  nameInput.value = "";
   document.querySelector("#easy").checked = true;
+  guessInput.value = "";
   playAgainReset();
   gamesPlayed = 0;
   scores = [];
