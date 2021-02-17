@@ -48,8 +48,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  height: 70%;
+  width: 75%;
+  height: 75%;
   box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.2);
   background-color: rgb(144, 177, 144);
   display: flex;
@@ -125,7 +125,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(224, 218, 161, 0.9);
+  background-color: rgba(224, 218, 161, 0.95);
   z-index: 5;
 }
 
